@@ -3,7 +3,6 @@ let tweet
 let key = 0
 const getTweets = (filter, until) => {
   return new Promise((resolve, reject) => {
-    console.log('key ', key)
     return client(key).get('search/tweets', {q: `${filter}`, until: until, count: 100})
       .then((tweets) => {
         tweets = tweets.statuses.filter(elm => ((elm.text[0]+elm.text[1]) !== 'RT'))
@@ -15,6 +14,7 @@ const getTweets = (filter, until) => {
             image: elm.entities.media ? true : false,
             imageUrl: elm.entities.media ? elm.entities.media[0].media_url : '',
             hashtag: filter,
+            lang: elm.lang,
             user: {
               name: elm.user.name,
               screenName: elm.user.screen_name,
@@ -42,3 +42,22 @@ const getTweets = (filter, until) => {
 module.exports = {
   getTweets
 }
+
+
+// var Twit = require('twit')
+//
+// var T = new Twit({
+//         consumer_key:'XMNiN0Aw3S74MPqhAflhpQ',
+//         consumer_secret:'aTHfRwjbwPKHfGtBM9rwt6Qko8jHAEnnRlZ7m5muc',
+//         access_token:'14307977-W28juG3Irm7h14cBkWqUnSsZWsRUsw06x6h1i8iIv',
+//         access_token_secret:'729lmn1hUJ4e9X4hCCDwBUGvyySDTf8fIxlCc2Htj5gxY',
+//   timeout_ms:           30*1000,  // optional HTTP request timeout to apply to all requests.
+//   strictSSL:            true,     // optional - requires SSL certificates to be valid.
+// })
+//
+//
+// var stream = T.stream('statuses/filter', { track: ['bananas', 'oranges', 'strawberries'] })
+//
+// stream.on('tweet', function (tweet) {
+//   console.log(tweet);
+// })

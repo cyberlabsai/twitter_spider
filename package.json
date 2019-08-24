@@ -21,11 +21,14 @@
   },
   "homepage": "https://github.com/cyberlabsai/twitter_spider#readme",
   "dependencies": {
+    "@vitalets/google-translate-api": "^3.0.0",
     "axios": "^0.19.0",
     "bluebird": "^3.5.2",
     "dotenv": "^6.1.0",
+    "install": "^0.13.0",
     "moment-timezone": "^0.5.26",
     "node-cron": "^2.0.3",
+    "npm": "^6.11.2",
     "pg-promise": "^8.4.6",
     "twitter": "^1.7.1"
   }

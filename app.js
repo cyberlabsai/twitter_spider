@@ -10,7 +10,7 @@ const main = () => {
     return get('getHashtags')
       .then(hashtags => {
         hashtags = hashtags.map(elm => {
-          return getTweets(elm.hashtags, '2019-08-26')
+          return getTweets(elm.hashtags, '2019-08-23')
         })
         return Promise.all(hashtags)
           .then(res => {
@@ -47,6 +47,7 @@ const main = () => {
   })
 }
 
-cron.schedule(`*/${interval} * * * * *`, () => {
+cron.schedule(`*/1 * * * *`, () => {
+  console.log('cronn')
   main()
 })
