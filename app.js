@@ -1,20 +1,10 @@
 const cron = require('node-cron')
 const moment = require('moment-timezone')
+const interval = process.env.interval || 1
 const { get } = require('./database/execQuery')
 const { getTweets } = require('./query/getTweets')
+const { getImg } = require('./query/getImg')
 
-// Dont do it, kids. It's a gambiarra
-const fixCreateAt = time => {
-  // let month = 8
-  // time = time.split(' ')
-  // time = `${time[5]}-${month}-${time[2]} ${time[3]}`
-  // time = moment(time).tz("America/Sao_Paulo")
-  // console.log('bb', time)
-  console.log('bbb', time)
-  console.log()
-  console.log('aaa ', time)
-  return time
-}
 const main = () => {
   return new Promise((resolve, reject) => {
     return get('getHashtags')
@@ -27,25 +17,35 @@ const main = () => {
             let tweets = []
             res.forEach(elm => elm.forEach(el => tweets.push(el)))
             tweets = tweets.map(elm => {
-              elm.createdAt = moment(elm.createdAt).tz("America/Sao_Paulo").format('YYYY-MM-DD HH:mm:ss')
-              let arr
-              arr = [
-                elm.id,
-                elm.createdAt,
-                elm.tweet_text,
-                elm.image,
-                elm.imageUrl,
-                elm.user.screenName,
-                elm.user.name,
-                elm.user.profileImageUrl]
-              return get('insertTweets', arr)
+              elm.createdAt = elm.createdAt ? moment(elm.createdAt).tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss') : ''
+              let url = `https://twitter.com/${elm.user.screenName}/status/${elm.id}`
+              elm.url = url
+              return getImg(elm)
             })
-            return resolve(Promise.all(tweets))
+            return Promise.all(tweets)
+              .then(tweets => {
+                tweets = tweets.map(elm => {
+                  let arr
+                  arr = [
+                    elm.id,
+                    elm.createdAt,
+                    elm.tweet_text,
+                    elm.image,
+                    elm.imageUrl,
+                    elm.user.screenName,
+                    elm.user.name,
+                    elm.user.profileImageUrl,
+                    elm.url]
+                  return get('insertTweets', arr)
+                })
+                return resolve(Promise.all(tweets))
+              })
           })
       })
       .catch(err => reject(err))
   })
 }
-cron.schedule('*/1 * * * * *', () => {
+
+cron.schedule(`*/${interval} * * * * *`, () => {
   main()
 })

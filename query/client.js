@@ -1,11 +1,11 @@
-const Twitter = require('twitter')
 const config = require('../config')
+const Twitter = require('twitter')
 
-const client = new Twitter({
-  consumer_key: config.consumer_key,
-  consumer_secret: config.consumer_secret,
-  access_token_key: config.access_token_key,
-  access_token_secret: config.access_token_secret
+const client = (key) =>new Twitter({
+  consumer_key: config[key].consumer_key,
+  consumer_secret: config[key].consumer_secret,
+  access_token_key: config[key].access_token_key,
+  access_token_secret: config[key].access_token_secret
 })
 
 module.exports = {
