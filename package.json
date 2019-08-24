@@ -1,0 +1,31 @@
+{
+  "name": "twitter_spider",
+  "version": "1.0.0",
+  "description": "Twitter Scrapper to get all tweets with the hashtag braziljs19",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyberlabsai/twitter_spider.git"
+  },
+  "keywords": [
+    "scrapper",
+    "crawler"
+  ],
+  "author": "atila",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyberlabsai/twitter_spider/issues"
+  },
+  "homepage": "https://github.com/cyberlabsai/twitter_spider#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bluebird": "^3.5.2",
+    "dotenv": "^6.1.0",
+    "node-cron": "^2.0.3",
+    "pg-promise": "^8.4.6",
+    "twitter": "^1.7.1"
+  }
+}
