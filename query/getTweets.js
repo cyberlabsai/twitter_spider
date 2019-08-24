@@ -14,6 +14,7 @@ const getTweets = (filter, until) => {
             tweet_text: elm.text,
             image: elm.entities.media ? true : false,
             imageUrl: elm.entities.media ? elm.entities.media[0].media_url : '',
+            hashtag: filter,
             user: {
               name: elm.user.name,
               screenName: elm.user.screen_name,
@@ -30,7 +31,7 @@ const getTweets = (filter, until) => {
         console.log(err)
         if (err[0].message === 'Rate limit exceeded') {
           key = (key === 0 ? 1 : 0)
-          // console.log('mudei', key)
+          console.log('mudei', key)
         } else {
           return reject(err)
         }

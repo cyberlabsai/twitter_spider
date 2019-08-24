@@ -15,7 +15,8 @@ create table tweets
     user_screen_name  text,
     profile_image_url text,
     read              boolean,
-    url               text
+    url               text,
+    hashtag           text
 );
 
 alter table tweets

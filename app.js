@@ -35,7 +35,8 @@ const main = () => {
                     elm.user.screenName,
                     elm.user.name,
                     elm.user.profileImageUrl,
-                    elm.url]
+                    elm.url,
+                    elm.hashtag]
                   return get('insertTweets', arr)
                 })
                 return resolve(Promise.all(tweets))
