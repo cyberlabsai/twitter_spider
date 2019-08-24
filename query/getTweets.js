@@ -9,7 +9,7 @@ const getTweets = (filter, until) => {
         tweets = tweets.statuses.filter(elm => ((elm.text[0]+elm.text[1]) !== 'RT'))
         tweets = tweets.map(elm => {
           tweet = {
-            id: elm.id,
+            id: elm.id_str,
             createdAt: elm.created_at,
             tweet_text: elm.text,
             image: elm.entities.media ? true : false,

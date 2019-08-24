@@ -10,7 +10,7 @@ const main = () => {
     return get('getHashtags')
       .then(hashtags => {
         hashtags = hashtags.map(elm => {
-          return getTweets(elm.hashtags, '2019-08-25')
+          return getTweets(elm.hashtags, '2019-08-26')
         })
         return Promise.all(hashtags)
           .then(res => {
