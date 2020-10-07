@@ -28,7 +28,7 @@
     "install": "^0.13.0",
     "moment-timezone": "^0.5.26",
     "node-cron": "^2.0.3",
-    "npm": "^6.11.2",
+    "npm": "^6.14.6",
     "pg-promise": "^8.4.6",
     "twitter": "^1.7.1"
   }
